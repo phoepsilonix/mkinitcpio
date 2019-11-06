@@ -1,0 +1,114 @@
+diff -Npur mkinitcpio.orig/libalpm/scripts/mkinitcpio-install mkinitcpio/libalpm/scripts/mkinitcpio-install
+--- mkinitcpio.orig/libalpm/scripts/mkinitcpio-install	2019-11-06 14:30:35.281230000 +0100
++++ mkinitcpio/libalpm/scripts/mkinitcpio-install	2019-11-06 23:26:33.871483000 +0100
+@@ -15,20 +15,32 @@ while read -r line; do
+         continue
+     fi
+ 
++    if ! read -r kernelbase > /dev/null 2>&1 < "${line%/vmlinuz}/kernelbase"; then
++        # this kernel has no kernelbase, use pkgbase
++        kernelbase="${pkgbase}"
++    fi
++
+     preset="/etc/mkinitcpio.d/${pkgbase}.preset"
++
++    # sed expression for following substitutions
++    _subst="
++      s|%PKGBASE%|${pkgbase}|g
++      s|%KERNELBASE%|${kernelbase}|g
++    "
++
+     if [[ ! -e $preset ]]; then
+         if [[ -e $preset.pacsave ]]; then
+             # move the pacsave to the template
+             mv "${preset}.pacsave" "$preset"
+         else
+             # create the preset from the template
+-            sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset \
++            sed "${_subst}" /usr/share/mkinitcpio/hook.preset \
+                 | install -Dm644 /dev/stdin "$preset"
+         fi
+     fi
+ 
+     # always install the kernel
+-    install -Dm644 "${line}" "/boot/vmlinuz-${pkgbase}"
++    install -Dm644 "${line}" "/boot/vmlinuz-${kernelbase}"
+ 
+     # compound args for each kernel
+     args+=(-p "${pkgbase}")
+diff -Npur mkinitcpio.orig/libalpm/scripts/mkinitcpio-remove mkinitcpio/libalpm/scripts/mkinitcpio-remove
+--- mkinitcpio.orig/libalpm/scripts/mkinitcpio-remove	2019-11-06 14:30:35.281230000 +0100
++++ mkinitcpio/libalpm/scripts/mkinitcpio-remove	2019-11-06 23:29:06.769764587 +0100
+@@ -14,11 +14,17 @@ while read -r line; do
+         continue
+     fi
+ 
++    if ! read -r kernelbase > /dev/null 2>&1 < "${line%/vmlinuz}/kernelbase"; then
++        # this kernel has no kernelbase, use pkgbase
++        kernelbase="${pkgbase}"
++    fi
++
+     # remove the actual kernel and images for the package being removed
+-    kernel="/boot/vmlinuz-${pkgbase}"
++    kernel="/boot/vmlinuz-${kernelbase}"
+     preset="/etc/mkinitcpio.d/${pkgbase}.preset"
+-    initramfs="/boot/initramfs-${pkgbase}.img"
+-    fallback_initramfs="/boot/initramfs-${pkgbase}-fallback.img"
++    initramfs="/boot/initramfs-${kernelbase}.img"
++    fallback_initramfs="/boot/initramfs-${kernelbase}-fallback.img"
++
+     if [[ -e $kernel ]]; then
+         # remove the installed kernel
+         rm $kernel
+diff -Npur mkinitcpio.orig/mkinitcpio.d/example.preset mkinitcpio/mkinitcpio.d/example.preset
+--- mkinitcpio.orig/mkinitcpio.d/example.preset	2019-11-06 14:30:35.281230000 +0100
++++ mkinitcpio/mkinitcpio.d/example.preset	2019-11-06 14:51:52.615469341 +0100
+@@ -6,20 +6,20 @@ PRESETS=('default' 'fallback')
+ # ALL_kver is used if presetname_kver is not set
+ # The kver can be specified as an explicit kernel version or
+ # as the path to an kernel image.
+-ALL_kver='/boot/vmlinuz-linux'
+-ALL_config='/etc/mkinitcpio.conf'
++ALL_config="/etc/mkinitcpio.conf"
++ALL_kver="/boot/vmlinuz-5.3-x86_64"
+ 
+ # presetname_kver    - the kernel version (omit if ALL_kver should be used)
+ # presetname_config  - the configuration file (omit if ALL_config should be used)
+ # presetname_image   - the filename of generated image
+ # presetname_options - any extra options
+ 
+-#default_kver="3.0-ARCH"
++#default_kver="5.3.8-3-MANJARO"
+ #default_config="/etc/mkinitcpio.conf"
+-default_image="/tmp/initramfs-linux.img"
+-default_options=""
++default_image="/boot/initramfs-5.3-x86_64.img"
++#default_options=""
+ 
+-#fallback_kver="3.0-ARCH"
++#fallback_kver="5.3.8-3-MANJARO"
+ #fallback_config="/etc/mkinitcpio.conf"
+-fallback_image="/tmp/initramfs-linux-fallback.img"
++fallback_image="/boot/initramfs-5.3-x86_64-fallback.img"
+ fallback_options="-S autodetect"
+diff -Npur mkinitcpio.orig/mkinitcpio.d/hook.preset mkinitcpio/mkinitcpio.d/hook.preset
+--- mkinitcpio.orig/mkinitcpio.d/hook.preset	2019-11-06 14:30:35.281230000 +0100
++++ mkinitcpio/mkinitcpio.d/hook.preset	2019-11-06 15:51:22.742669018 +0100
+@@ -1,14 +1,14 @@
+ # mkinitcpio preset file for the '%PKGBASE%' package
+ 
+ ALL_config="/etc/mkinitcpio.conf"
+-ALL_kver="/boot/vmlinuz-%PKGBASE%"
++ALL_kver="/boot/vmlinuz-%KERNELBASE%"
+ 
+ PRESETS=('default' 'fallback')
+ 
+ #default_config="/etc/mkinitcpio.conf"
+-default_image="/boot/initramfs-%PKGBASE%.img"
++default_image="/boot/initramfs-%KERNELBASE%.img"
+ #default_options=""
+ 
+ #fallback_config="/etc/mkinitcpio.conf"
+-fallback_image="/boot/initramfs-%PKGBASE%-fallback.img"
++fallback_image="/boot/initramfs-%KERNELBASE%-fallback.img"
+ fallback_options="-S autodetect"
