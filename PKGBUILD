@@ -5,13 +5,13 @@
 
 pkgname=mkinitcpio
 pkgver=27
-pkgrel=1.2
+pkgrel=2.0
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url="https://projects.archlinux.org/mkinitcpio.git/"
 license=('GPL')
-depends=('awk' 'mkinitcpio-busybox>=1.19.4-2' 'kmod' 'util-linux>=2.23' 'libarchive'
-         'coreutils' 'bash' 'findutils' 'grep' 'filesystem>=2011.10-1' 'gzip' 'systemd')
+depends=('awk' 'mkinitcpio-busybox>=1.19.4-2' 'kmod' 'util-linux>=2.23' 'libarchive' 'coreutils'
+         'bash' 'diffutils' 'findutils' 'grep' 'filesystem>=2011.10-1' 'gzip' 'systemd')
 optdepends=('xz: Use lzma or xz compression for the initramfs image'
             'bzip2: Use bzip2 compression for the initramfs image'
             'lzop: Use lzo compression for the initramfs image'
@@ -20,23 +20,26 @@ optdepends=('xz: Use lzma or xz compression for the initramfs image'
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig}
-        manjaro.patch)
+        0001-mkinitcpio-remove-preset-pacsave.patch manjaro.patch)
 install=mkinitcpio.install
 sha256sums=('e6bff1cb78b677538eb9aace900b715fd59de8fc210b74fb9d899dfaa32bc354'
             'SKIP'
+            '845569fa760f70c868ecb3dc8ae9667287970526dddaf403fdafcb716e8b3d51'
             'f6a619c2dfc5a6bdd4596d9b4d9f7fdcce3ee0244390161cab51ef646b7317f8')
 validpgpkeys=('487EACC08557AD082088DABA1EB2638FF56C0C53'   # Dave Reisner
               '86CFFCA918CF3AF47147588051E8B148A9999C34'   # Evangelos Foutras
               'ECCAC84C1BA08A6CC8E63FBBF22FB1D78A77AEAB')  # Giancarlo Razzolini
 
-check() {
-  make -C "$pkgname-$pkgver" check
-}
-
 prepare() {
   cd "$pkgname-$pkgver"
+  # Apply 0001-mkinitcpio-remove-preset-pacsave.patch
+  patch -Np1 < $srcdir/0001-mkinitcpio-remove-preset-pacsave.patch
+  # Add changes of Manjaro
   patch -p1 -i ../manjaro.patch
-  cd ..
+}
+
+check() {
+  make -C "$pkgname-$pkgver" check
 }
 
 package() {
