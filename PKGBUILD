@@ -5,7 +5,7 @@
 
 pkgname=mkinitcpio
 pkgver=27
-pkgrel=2.0
+pkgrel=2.1
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url="https://projects.archlinux.org/mkinitcpio.git/"
@@ -44,4 +44,7 @@ check() {
 
 package() {
   make -C "$pkgname-$pkgver" DESTDIR="$pkgdir" install
+
+  # https://www.archlinux.org/todo/alpm-hooks-should-use-type-path-not-file/
+  sed -i -e 's|File|Path|' "$pkgdir"/usr/share/libalpm/hooks/*hook
 }
