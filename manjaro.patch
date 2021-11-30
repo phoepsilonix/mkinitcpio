@@ -1,7 +1,7 @@
-diff -Npur mkinitcpio.orig/libalpm/scripts/mkinitcpio-install mkinitcpio/libalpm/scripts/mkinitcpio-install
---- mkinitcpio.orig/libalpm/scripts/mkinitcpio-install	2019-11-06 14:30:35.281230000 +0100
-+++ mkinitcpio/libalpm/scripts/mkinitcpio-install	2019-11-06 23:26:33.871483000 +0100
-@@ -15,20 +15,32 @@ while read -r line; do
+diff --unified --recursive --text mkinitcpio-31.orig/libalpm/scripts/mkinitcpio-install mkinitcpio-31/libalpm/scripts/mkinitcpio-install
+--- mkinitcpio-31.orig/libalpm/scripts/mkinitcpio-install	2021-11-29 04:15:01.000000000 -0700
++++ mkinitcpio-31/libalpm/scripts/mkinitcpio-install	2021-11-30 13:38:27.209473375 -0700
+@@ -15,20 +15,32 @@
          continue
      fi
  
@@ -36,10 +36,10 @@ diff -Npur mkinitcpio.orig/libalpm/scripts/mkinitcpio-install mkinitcpio/libalpm
  
      # compound args for each kernel
      args+=(-p "${pkgbase}")
-diff -Npur mkinitcpio.orig/libalpm/scripts/mkinitcpio-remove mkinitcpio/libalpm/scripts/mkinitcpio-remove
---- mkinitcpio.orig/libalpm/scripts/mkinitcpio-remove	2019-11-06 14:30:35.281230000 +0100
-+++ mkinitcpio/libalpm/scripts/mkinitcpio-remove	2019-11-06 23:29:06.769764587 +0100
-@@ -14,11 +14,17 @@ while read -r line; do
+diff --unified --recursive --text mkinitcpio-31.orig/libalpm/scripts/mkinitcpio-remove mkinitcpio-31/libalpm/scripts/mkinitcpio-remove
+--- mkinitcpio-31.orig/libalpm/scripts/mkinitcpio-remove	2021-11-29 04:15:01.000000000 -0700
++++ mkinitcpio-31/libalpm/scripts/mkinitcpio-remove	2021-11-30 13:38:27.209473375 -0700
+@@ -28,11 +28,17 @@
          continue
      fi
  
@@ -60,20 +60,11 @@ diff -Npur mkinitcpio.orig/libalpm/scripts/mkinitcpio-remove mkinitcpio/libalpm/
      if [[ -e $kernel ]]; then
          # remove the installed kernel
          rm $kernel
-diff -Npur mkinitcpio.orig/mkinitcpio.d/example.preset mkinitcpio/mkinitcpio.d/example.preset
---- mkinitcpio.orig/mkinitcpio.d/example.preset	2019-11-06 14:30:35.281230000 +0100
-+++ mkinitcpio/mkinitcpio.d/example.preset	2019-11-06 14:51:52.615469341 +0100
-@@ -6,20 +6,20 @@ PRESETS=('default' 'fallback')
- # ALL_kver is used if presetname_kver is not set
- # The kver can be specified as an explicit kernel version or
- # as the path to an kernel image.
--ALL_kver='/boot/vmlinuz-linux'
--ALL_config='/etc/mkinitcpio.conf'
-+ALL_config="/etc/mkinitcpio.conf"
-+ALL_kver="/boot/vmlinuz-5.3-x86_64"
- 
- # presetname_kver    - the kernel version (omit if ALL_kver should be used)
- # presetname_config  - the configuration file (omit if ALL_config should be used)
+Only in mkinitcpio-31/libalpm/scripts: mkinitcpio-remove.orig
+diff --unified --recursive --text mkinitcpio-31.orig/mkinitcpio.d/example.preset mkinitcpio-31/mkinitcpio.d/example.preset
+--- mkinitcpio-31.orig/mkinitcpio.d/example.preset	2021-11-29 04:15:01.000000000 -0700
++++ mkinitcpio-31/mkinitcpio.d/example.preset	2021-11-30 14:09:28.797770680 -0700
+@@ -15,14 +15,14 @@
  # presetname_image   - the filename of generated image
  # presetname_options - any extra options
  
@@ -81,19 +72,22 @@ diff -Npur mkinitcpio.orig/mkinitcpio.d/example.preset mkinitcpio/mkinitcpio.d/e
 +#default_kver="5.3.8-3-MANJARO"
  #default_config="/etc/mkinitcpio.conf"
 -default_image="/tmp/initramfs-linux.img"
--default_options=""
+-default_efi_image="/efi/EFI/Linux/arch-linux.efi"
 +default_image="/boot/initramfs-5.3-x86_64.img"
-+#default_options=""
++default_efi_image="/efi/EFI/Manjaro/grubx64.efi"
+ default_options=""
  
 -#fallback_kver="3.0-ARCH"
 +#fallback_kver="5.3.8-3-MANJARO"
  #fallback_config="/etc/mkinitcpio.conf"
 -fallback_image="/tmp/initramfs-linux-fallback.img"
+-fallback_efi_image="/efi/EFI/Linux/arch-linux-fallback.efi"
 +fallback_image="/boot/initramfs-5.3-x86_64-fallback.img"
++fallback_efi_image="/efi/EFI/Manjaro/grubx64-fallback.efi"
  fallback_options="-S autodetect"
-diff -Npur mkinitcpio.orig/mkinitcpio.d/hook.preset mkinitcpio/mkinitcpio.d/hook.preset
---- mkinitcpio.orig/mkinitcpio.d/hook.preset	2019-11-06 14:30:35.281230000 +0100
-+++ mkinitcpio/mkinitcpio.d/hook.preset	2019-11-06 15:51:22.742669018 +0100
+diff --unified --recursive --text mkinitcpio-31.orig/mkinitcpio.d/hook.preset mkinitcpio-31/mkinitcpio.d/hook.preset
+--- mkinitcpio-31.orig/mkinitcpio.d/hook.preset	2021-11-29 04:15:01.000000000 -0700
++++ mkinitcpio-31/mkinitcpio.d/hook.preset	2021-11-30 13:38:27.209473375 -0700
 @@ -1,14 +1,14 @@
  # mkinitcpio preset file for the '%PKGBASE%' package
  
