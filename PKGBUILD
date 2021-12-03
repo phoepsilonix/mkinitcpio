@@ -8,13 +8,13 @@
 
 pkgname=mkinitcpio
 pkgver=31
-pkgrel=1
+pkgrel=2
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://github.com/archlinux/mkinitcpio'
 license=('GPL')
 depends=('awk' 'mkinitcpio-busybox>=1.19.4-2' 'kmod' 'util-linux>=2.23' 'libarchive' 'coreutils'
-         'bash' 'diffutils' 'findutils' 'grep' 'filesystem>=2011.10-1' 'gzip' 'systemd')
+         'bash' 'binutils' 'diffutils' 'findutils' 'grep' 'filesystem>=2011.10-1' 'gzip' 'systemd')
 makedepends=('asciidoc')
 optdepends=('xz: Use lzma or xz compression for the initramfs image'
             'bzip2: Use bzip2 compression for the initramfs image'
@@ -46,7 +46,4 @@ check() {
 
 package() {
   make -C "$pkgname-$pkgver" DESTDIR="$pkgdir" install
-
-  # https://www.archlinux.org/todo/alpm-hooks-should-use-type-path-not-file/
-  sed -i -e 's|File|Path|' "$pkgdir"/usr/share/libalpm/hooks/*hook
 }
