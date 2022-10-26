@@ -9,7 +9,7 @@
 
 pkgname=mkinitcpio
 pkgver=32
-pkgrel=1
+pkgrel=2
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://github.com/archlinux/mkinitcpio'
@@ -26,6 +26,7 @@ optdepends=('xz: Use lzma or xz compression for the initramfs image'
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig}
+        "fix-strip.patch::https://github.com/archlinux/mkinitcpio/commit/dece596d569ca90af902bf2403227b478b629c03.patch"
         # Manjaro patches
         manjaro.patch
         revert-ab6bad7.patch
@@ -35,6 +36,7 @@ source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,
 install=mkinitcpio.install
 sha256sums=('f167d0b9831a5b6ae388525ebc92cea3a4766429e16ee2b56dbaa8d3b7c73ab2'
             'SKIP'
+            'd5ca05e3f2b338f6ac988461ba9bd60c030e7cb092aecf90b43d5a470e7e3652'
             'b2627c0cefea71c185298487404464fdf4c208ffeb25608608d7e3b4313f7817'
             'dc57b5d5c09fb32d9cd87dd939ed867cd1fe78088fe5aa6d33c5512c86806e24'
             '2d2814cf08a3afd0633967c3e7ad1df920318c028e97c46f4fbdb92a10f5f39a'
