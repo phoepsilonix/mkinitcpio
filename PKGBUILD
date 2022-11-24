@@ -8,8 +8,8 @@
 # Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgname=mkinitcpio
-pkgver=32
-pkgrel=2
+pkgver=33
+pkgrel=1
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://github.com/archlinux/mkinitcpio'
@@ -26,21 +26,14 @@ optdepends=('xz: Use lzma or xz compression for the initramfs image'
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig}
-        "fix-strip.patch::https://github.com/archlinux/mkinitcpio/commit/dece596d569ca90af902bf2403227b478b629c03.patch"
         # Manjaro patches
         manjaro.patch
-        revert-ab6bad7.patch
-        # Upstream PRs
-        https://github.com/archlinux/mkinitcpio/pull/88.patch
-        https://github.com/archlinux/mkinitcpio/pull/89.patch)
+        revert-ab6bad7.patch)
 install=mkinitcpio.install
-sha256sums=('f167d0b9831a5b6ae388525ebc92cea3a4766429e16ee2b56dbaa8d3b7c73ab2'
+sha256sums=('d95ad68cf81cb48f654a784d67949124c9ef7ba84a6d76f618d00d187c33f7f5'
             'SKIP'
-            'd5ca05e3f2b338f6ac988461ba9bd60c030e7cb092aecf90b43d5a470e7e3652'
             'b2627c0cefea71c185298487404464fdf4c208ffeb25608608d7e3b4313f7817'
-            'dc57b5d5c09fb32d9cd87dd939ed867cd1fe78088fe5aa6d33c5512c86806e24'
-            '2d2814cf08a3afd0633967c3e7ad1df920318c028e97c46f4fbdb92a10f5f39a'
-            'b59ea68a0ab205d169c0d71a631b0c40ec3a5af7a0596e7a8d6da59f6266c940')
+            'dc57b5d5c09fb32d9cd87dd939ed867cd1fe78088fe5aa6d33c5512c86806e24')
 validpgpkeys=('ECCAC84C1BA08A6CC8E63FBBF22FB1D78A77AEAB'    # Giancarlo Razzolini
               'C100346676634E80C940FB9E9C02FF419FECBE16')   # Morten Linderud
 
