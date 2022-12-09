@@ -8,7 +8,7 @@
 # Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgname=mkinitcpio
-pkgver=33
+pkgver=34
 pkgrel=1
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
@@ -16,23 +16,26 @@ url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
 license=('GPL')
 depends=('awk' 'mkinitcpio-busybox>=1.19.4-2' 'kmod' 'util-linux>=2.23' 'libarchive' 'coreutils'
          'bash' 'binutils' 'diffutils' 'findutils' 'grep' 'filesystem>=2011.10-1' 'gzip' 'systemd')
-makedepends=('asciidoc')
-optdepends=('xz: Use lzma or xz compression for the initramfs image'
+checkdepends=('bash-bats' 'bash-bats-assert' 'lzop')
+optdepends=('zstd: Use zstd compression for the initramfs image'
+            'xz: Use lzma or xz compression for the initramfs image'
             'bzip2: Use bzip2 compression for the initramfs image'
             'lzop: Use lzo compression for the initramfs image'
             'lz4: Use lz4 compression for the initramfs image'
-            'zstd: Use zstd compression for the initramfs image'
             'mkinitcpio-nfs-utils: Support for root filesystem on NFS')
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig}
+        '0001-functions-fix-overwriting-of-symlinks-with-regular-f.patch'
         # Manjaro patches
-        manjaro.patch
-        revert-ab6bad7.patch)
+        'manjaro.patch'
+        'revert-ab6bad7.patch'
+        )
 install=mkinitcpio.install
-sha256sums=('d95ad68cf81cb48f654a784d67949124c9ef7ba84a6d76f618d00d187c33f7f5'
+sha256sums=('181a5915fc4e7db4fcfb38fb5fa022ba5a782f6904d6d6455c6b5a0617109bd0'
             'SKIP'
-            'fbdef0bafe9db6449ec8a14c1e5ca37efb6ed2c5af33e829fcf2d5c67b8a6ef2'
+            '82a34a48154c384980aa4e61d49bd447c568d5d60676f27c14a2a12a5ea63b4d'
+            'a555133e778901a3c5948d32162a48904705cb5fda82b9cd78e7246d66926534'
             'dc57b5d5c09fb32d9cd87dd939ed867cd1fe78088fe5aa6d33c5512c86806e24')
 validpgpkeys=('ECCAC84C1BA08A6CC8E63FBBF22FB1D78A77AEAB'    # Giancarlo Razzolini
               'C100346676634E80C940FB9E9C02FF419FECBE16')   # Morten Linderud
