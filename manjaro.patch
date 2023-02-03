@@ -35,7 +35,7 @@ diff --unified --recursive --text a/libalpm/scripts/mkinitcpio b/libalpm/scripts
 -    initramfs="/boot/initramfs-${1}.img"
 -    fallback_initramfs="/boot/initramfs-${1}-fallback.img"
 +    kernel="/boot/vmlinuz-${kernelbase}"
-+    preset="/etc/mkinitcpio.d/${kernelbase}.preset"
++    preset="/etc/mkinitcpio.d/${1}.preset"
 +    initramfs="/boot/initramfs-${kernelbase}.img"
 +    fallback_initramfs="/boot/initramfs-${kernelbase}-fallback.img"
      # remove the installed kernel
