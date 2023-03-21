@@ -8,14 +8,15 @@
 # Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgname=mkinitcpio
-pkgver=34
-pkgrel=1.1
+pkgver=35.1
+pkgrel=1
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
 license=('GPL')
 depends=('awk' 'mkinitcpio-busybox>=1.19.4-2' 'kmod' 'util-linux>=2.23' 'libarchive' 'coreutils'
          'bash' 'binutils' 'diffutils' 'findutils' 'grep' 'filesystem>=2011.10-1' 'gzip' 'systemd')
+makedepends=('asciidoc')
 checkdepends=('bash-bats' 'bash-bats-assert' 'lzop')
 optdepends=('zstd: Use zstd compression for the initramfs image'
             'xz: Use lzma or xz compression for the initramfs image'
@@ -26,17 +27,15 @@ optdepends=('zstd: Use zstd compression for the initramfs image'
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig}
-        '0001-functions-fix-overwriting-of-symlinks-with-regular-f.patch'
         # Manjaro patches
         'manjaro.patch'
         'revert-ab6bad7.patch'
         )
 install=mkinitcpio.install
-sha256sums=('181a5915fc4e7db4fcfb38fb5fa022ba5a782f6904d6d6455c6b5a0617109bd0'
+sha256sums=('0aed45a087d1a3c72126535470ddad96af1939495e733f186ae72e5cfbf1fadb'
             'SKIP'
-            '82a34a48154c384980aa4e61d49bd447c568d5d60676f27c14a2a12a5ea63b4d'
-            '06179387ae47449e22569d58342a71f55af0c74852253446d7718790cc7e9043'
-            'dc57b5d5c09fb32d9cd87dd939ed867cd1fe78088fe5aa6d33c5512c86806e24')
+            'b63948ed787863f14d26d68c40f56d35c44a97b55e9653aa9915bc6c77661795'
+            'a08e9118ca214562c7c10ff3bb1c1370bd0a93ce76dc83b91a2c0eebea11eb2d')
 validpgpkeys=('ECCAC84C1BA08A6CC8E63FBBF22FB1D78A77AEAB'    # Giancarlo Razzolini
               'C100346676634E80C940FB9E9C02FF419FECBE16')   # Morten Linderud
 
