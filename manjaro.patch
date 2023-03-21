@@ -14,7 +14,7 @@
          else
              # create the preset from the template
 -            sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset \
-+            sed "s|%KERNELBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset \
++            sed "s|%KERNELBASE%|${kernelbase}|g" /usr/share/mkinitcpio/hook.preset \
                  | install -Dm644 /dev/stdin "$preset"
          fi
      fi
