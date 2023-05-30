@@ -1,15 +1,15 @@
-diff --unified --recursive --text a/libalpm/scripts/mkinitcpio b/libalpm/scripts/mkinitcpio
---- a/libalpm/scripts/mkinitcpio	2023-03-19 08:24:59.000000000 -0600
-+++ b/libalpm/scripts/mkinitcpio	2023-03-23 10:25:32.608441928 -0600
-@@ -8,7 +8,7 @@
- 
+diff --unified --recursive --color a/libalpm/scripts/mkinitcpio b/libalpm/scripts/mkinitcpio
+--- a/libalpm/scripts/mkinitcpio	2023-05-30 11:09:11.860174078 -0600
++++ b/libalpm/scripts/mkinitcpio	2023-05-30 13:48:10.699171696 -0600
+@@ -9,7 +9,7 @@
  process_preset() {
      if [[ -n "$pkgbase" && -e "$preset" ]]; then
--        if ! cmp "$preset" > /dev/null 2>&1 <(sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset); then
-+        if ! cmp "$preset" > /dev/null 2>&1 <(sed "s|%KERNELBASE%|${kernelbase}|g" /usr/share/mkinitcpio/hook.preset); then
+-        if ! cmp "$preset" <(sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
++        if ! cmp "$preset" <(sed "s|%KERNELBASE%|${kernelbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
              if [[ ! -e "$preset.pacsave" ]]; then
                  # save the preset as pacsave
                  mv -- "$preset" "$preset.pacsave" && return 0
+             fi
 @@ -76,7 +76,7 @@
              mv -- "${preset}.pacsave" "$preset"
          else
@@ -55,14 +55,14 @@ diff --unified --recursive --text a/mkinitcpio.d/example.preset b/mkinitcpio.d/e
 +fallback_image="boot/initramfs-5.3-x86_64-fallback.img"
 +fallback_uki="/efi/EFI/Manjaro/grubx64-fallback.efi"
  fallback_options="-S autodetect"
-diff --unified --recursive --text a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
---- a/mkinitcpio.d/hook.preset	2023-03-19 08:24:59.000000000 -0600
-+++ b/mkinitcpio.d/hook.preset	2023-03-23 10:27:58.544463061 -0600
+diff --unified --recursive --color a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
+--- a/mkinitcpio.d/hook.preset	2023-05-29 15:56:00.000000000 -0600
++++ b/mkinitcpio.d/hook.preset	2023-05-30 13:51:32.131870607 -0600
 @@ -1,17 +1,17 @@
 -# mkinitcpio preset file for the '%PKGBASE%' package
 +# mkinitcpio preset file for the '%KERNELBASE%' package
  
- ALL_config="/etc/mkinitcpio.conf"
+ #ALL_config="/etc/mkinitcpio.conf"
 -ALL_kver="/boot/vmlinuz-%PKGBASE%"
 +ALL_kver="/boot/vmlinuz-%KERNELBASE%"
  ALL_microcode=(/boot/*-ucode.img)
@@ -71,12 +71,15 @@ diff --unified --recursive --text a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook
  
  #default_config="/etc/mkinitcpio.conf"
 -default_image="/boot/initramfs-%PKGBASE%.img"
+-#default_uki="/efi/EFI/Linux/arch-%PKGBASE%.efi"
 +default_image="/boot/initramfs-%KERNELBASE%.img"
- #default_uki="/efi/EFI/Linux/arch-%PKGBASE%.efi"
++#default_uki="/efi/EFI/Linux/arch-%KERNELBASE%.efi"
  #default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp"
  
  #fallback_config="/etc/mkinitcpio.conf"
 -fallback_image="/boot/initramfs-%PKGBASE%-fallback.img"
+-#fallback_uki="/efi/EFI/Linux/arch-%PKGBASE%-fallback.efi"
 +fallback_image="/boot/initramfs-%KERNELBASE%-fallback.img"
- #fallback_uki="/efi/EFI/Linux/arch-%PKGBASE%-fallback.efi"
++#fallback_uki="/efi/EFI/Linux/arch-%KERNELBASE%-fallback.efi"
  fallback_options="-S autodetect"
+
