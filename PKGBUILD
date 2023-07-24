@@ -10,7 +10,7 @@
 
 pkgname=mkinitcpio
 pkgver=36
-pkgrel=2
+pkgrel=3
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
@@ -36,7 +36,7 @@ install=mkinitcpio.install
 sha256sums=('7b3b1cdf546922f47845a3ac4353ca97899a4bb68cfff29098c45135e5fb8b5e'
             'SKIP'
             '628cbbd322d60e6fc00fc883033fc759ef9b988d6c0186cc9ea442ca9e002f0b'
-            'c812f15faf79e00718dc2f279c5ab9ac904fdc1220e854e735d7d24b36ea47da')
+            '257444ea4ffe7ea0d003ce79b21957a850ef08ee768c758668bb0f15f41afee5')
 validpgpkeys=('ECCAC84C1BA08A6CC8E63FBBF22FB1D78A77AEAB'    # Giancarlo Razzolini
               'C100346676634E80C940FB9E9C02FF419FECBE16')   # Morten Linderud
 
