@@ -10,7 +10,7 @@
 
 pkgname=mkinitcpio
 pkgver=36
-pkgrel=3
+pkgrel=4
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
@@ -28,6 +28,7 @@ optdepends=('zstd: Use zstd compression for the initramfs image'
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig}
+        'https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio/-/merge_requests/250.patch'
         # Manjaro patches
         'manjaro.patch'
         'revert-ab6bad7.patch'
@@ -35,6 +36,7 @@ source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,
 install=mkinitcpio.install
 sha256sums=('7b3b1cdf546922f47845a3ac4353ca97899a4bb68cfff29098c45135e5fb8b5e'
             'SKIP'
+            'af5ed525f15ae687abff1e806c2b01b6aaf4c9e27c0ccd1da77771621671eccb'
             '628cbbd322d60e6fc00fc883033fc759ef9b988d6c0186cc9ea442ca9e002f0b'
             '257444ea4ffe7ea0d003ce79b21957a850ef08ee768c758668bb0f15f41afee5')
 validpgpkeys=('ECCAC84C1BA08A6CC8E63FBBF22FB1D78A77AEAB'    # Giancarlo Razzolini
