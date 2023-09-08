@@ -34,30 +34,30 @@ diff --unified --recursive --color a/libalpm/scripts/mkinitcpio b/libalpm/script
 diff --unified --recursive --text a/mkinitcpio.d/example.preset b/mkinitcpio.d/example.preset
 --- a/mkinitcpio.d/example.preset	2023-03-19 08:24:59.000000000 -0600
 +++ b/mkinitcpio.d/example.preset	2023-03-23 10:29:50.223969082 -0600
-@@ -15,14 +15,14 @@
+@@ -15,14 +15,14 @@ ALL_microcode=(/boot/*-ucode.img)
  # presetname_image   - the filename of generated image
  # presetname_options - any extra options
  
 -#default_kver="3.0-ARCH"
-+#default_kver="5.3.8-3-MANJARO"
++#default_kver="6.5.2-1-MANJARO"
  #default_config="/etc/mkinitcpio.conf"
 -default_image="/tmp/initramfs-linux.img"
 -default_uki="/efi/EFI/Linux/arch-linux.efi"
-+default_image="/boot/initramfs-5.3-x86_64.img"
-+default_uki="/efi/EFI/Manjaro/grubx64.efi"
++default_image="/boot/initramfs-6.5-x86_64.img"
++default_uki="/efi/EFI/Linux/manjaro-6.5-x86_64.efi"
  default_options=""
  
 -#fallback_kver="3.0-ARCH"
-+#fallback_kver="5.3.8-3-MANJARO
++#fallback_kver="6.5.8-3-MANJARO
  #fallback_config="/etc/mkinitcpio.conf"
 -fallback_image="/tmp/initramfs-linux-fallback.img"
 -fallback_uki="/efi/EFI/Linux/arch-linux-fallback.efi"
-+fallback_image="boot/initramfs-5.3-x86_64-fallback.img"
-+fallback_uki="/efi/EFI/Manjaro/grubx64-fallback.efi"
++fallback_image="boot/initramfs-6.5-x86_64-fallback.img"
++fallback_uki="/efi/EFI/Linux/manjaro-6.5-x86_64-fallback.efi"
  fallback_options="-S autodetect"
-diff --unified --recursive --color a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
---- a/mkinitcpio.d/hook.preset	2023-05-29 15:56:00.000000000 -0600
-+++ b/mkinitcpio.d/hook.preset	2023-05-30 13:51:32.131870607 -0600
+diff -Npur a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
+--- a/mkinitcpio.d/hook.preset	2023-05-29 23:56:00.000000000 +0200
++++ b/mkinitcpio.d/hook.preset	2023-09-08 07:10:49.970614551 +0200
 @@ -1,17 +1,17 @@
 -# mkinitcpio preset file for the '%PKGBASE%' package
 +# mkinitcpio preset file for the '%KERNELBASE%' package
@@ -72,14 +72,14 @@ diff --unified --recursive --color a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hoo
  #default_config="/etc/mkinitcpio.conf"
 -default_image="/boot/initramfs-%PKGBASE%.img"
 -#default_uki="/efi/EFI/Linux/arch-%PKGBASE%.efi"
+-#default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp"
 +default_image="/boot/initramfs-%KERNELBASE%.img"
-+#default_uki="/efi/EFI/Linux/arch-%KERNELBASE%.efi"
- #default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp"
++#default_uki="/efi/EFI/Linux/manjaro-%KERNELBASE%.efi"
++#default_options="--splash /usr/share/systemd/bootctl/splash-manjaro.bmp"
  
  #fallback_config="/etc/mkinitcpio.conf"
 -fallback_image="/boot/initramfs-%PKGBASE%-fallback.img"
 -#fallback_uki="/efi/EFI/Linux/arch-%PKGBASE%-fallback.efi"
 +fallback_image="/boot/initramfs-%KERNELBASE%-fallback.img"
-+#fallback_uki="/efi/EFI/Linux/arch-%KERNELBASE%-fallback.efi"
++#fallback_uki="/efi/EFI/Linux/manjaro-%KERNELBASE%-fallback.efi"
  fallback_options="-S autodetect"
-
