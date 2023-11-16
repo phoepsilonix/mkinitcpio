@@ -9,8 +9,8 @@
 # Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgname=mkinitcpio
-pkgver=36
-pkgrel=6
+pkgver=37
+pkgrel=1
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
@@ -28,19 +28,19 @@ optdepends=('zstd: Use zstd compression for the initramfs image'
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig}
-        'https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio/-/merge_requests/250.patch'
-        'https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio/-/merge_requests/251.patch'
         # Manjaro patches
         'manjaro.patch'
         'revert-ab6bad7.patch'
         )
 install=mkinitcpio.install
-sha256sums=('7b3b1cdf546922f47845a3ac4353ca97899a4bb68cfff29098c45135e5fb8b5e'
+sha512sums=('45548350cd66de6ba2ba5260db3c72d0b6153be36c068ebbd81725252d1dc62fd5dd798acd4a0245c7b58710fa2fea7c3066bd99ecd498dfc154177459af2038'
             'SKIP'
-            'af5ed525f15ae687abff1e806c2b01b6aaf4c9e27c0ccd1da77771621671eccb'
-            '4a6bd157911116ec41a0eaf85e8cf8dc9c083cd622123a06074c81a8c23492a8'
-            'd2c2d58392b21c5505ef9ac0dfa56389f380f5493fdbdf0f7f40e29fd65a604c'
-            '257444ea4ffe7ea0d003ce79b21957a850ef08ee768c758668bb0f15f41afee5')
+            '2b374bca8449fb2154d4a314a209bbdd7cf95e34a2038e68ab8a666f657f141f0d73222636afb5c65daf44dee1a5a0a79975e2fc3d28daf8bab93ccfbc371214'
+            'f9d40d170fd6c7278252d61ab0018373b6b4dc3ed018f542a4745fd62e8ed2842e049c7ca8066b472fed1eafe1f19c4e6c167be2c5e3d61bb2bfdfd00782bc88')
+b2sums=('84c5122c3775f136bb768580519cb91a18769184d947cfe0e2c714607fe3e7f3e210cf4b58252fad831be8b211e18d7bef33acede97fa273775437d11f25fe07'
+        'SKIP'
+        '30802693fd01f7f08bdb0f028a4f68fd7033108c16ad37529f5b127c96c25a31c433d35dfb7764d063f8640f0df2f3aae5b29ae64423f871b7d36654d208ecc4'
+        '44c66edefdce5836f57f272c86f90dd44c1669c0050efea01423e07856bb081466a1714dd31b41b159dcaaded38ffb175722db0297c76036303b380d94d76ea1')
 validpgpkeys=('ECCAC84C1BA08A6CC8E63FBBF22FB1D78A77AEAB'    # Giancarlo Razzolini
               'C100346676634E80C940FB9E9C02FF419FECBE16')   # Morten Linderud
 
@@ -63,3 +63,4 @@ check() {
 package() {
   make -C "$pkgname-$pkgver" DESTDIR="$pkgdir" install
 }
+
