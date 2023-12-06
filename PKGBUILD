@@ -9,7 +9,7 @@
 # Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgname=mkinitcpio
-pkgver=37
+pkgver=37.1
 pkgrel=1
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
@@ -33,11 +33,11 @@ source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,
         'revert-ab6bad7.patch'
         )
 install=mkinitcpio.install
-sha512sums=('45548350cd66de6ba2ba5260db3c72d0b6153be36c068ebbd81725252d1dc62fd5dd798acd4a0245c7b58710fa2fea7c3066bd99ecd498dfc154177459af2038'
+sha512sums=('68fd36eb95317977dfb389be8bd1f6f09d455ca81b55cde8f64245fc59ceee74afa64b55dbb7e8b2e28abe8274397dbba2f4b021499f9ad6d662175ced678585'
             'SKIP'
             '2b374bca8449fb2154d4a314a209bbdd7cf95e34a2038e68ab8a666f657f141f0d73222636afb5c65daf44dee1a5a0a79975e2fc3d28daf8bab93ccfbc371214'
             'f9d40d170fd6c7278252d61ab0018373b6b4dc3ed018f542a4745fd62e8ed2842e049c7ca8066b472fed1eafe1f19c4e6c167be2c5e3d61bb2bfdfd00782bc88')
-b2sums=('84c5122c3775f136bb768580519cb91a18769184d947cfe0e2c714607fe3e7f3e210cf4b58252fad831be8b211e18d7bef33acede97fa273775437d11f25fe07'
+b2sums=('0b43d0d035fdba6195ca0e8facd654cbcff9c99d34d14b1f493c86cbea335c8f363e6117df7f0307e55b3e684fe7977d89ac226b79ed612270791e084b46aa4f'
         'SKIP'
         '30802693fd01f7f08bdb0f028a4f68fd7033108c16ad37529f5b127c96c25a31c433d35dfb7764d063f8640f0df2f3aae5b29ae64423f871b7d36654d208ecc4'
         '44c66edefdce5836f57f272c86f90dd44c1669c0050efea01423e07856bb081466a1714dd31b41b159dcaaded38ffb175722db0297c76036303b380d94d76ea1')
