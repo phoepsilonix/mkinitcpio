@@ -10,3 +10,11 @@
          add_full_dir "$(realpath -- "${dest%/*}")"
          add_symlink "${dest%/*}"
          [[ -e "$(realpath -- "${BUILDROOT}${dest}")" ]] && return
+@@ -752,6 +753,7 @@ add_file() {
+ 
+     # unlike install, cp does not create directories leading to the destination
+     [[ -z "$mode" && ! -e "${BUILDROOT}${dest%/*}" ]] && add_dir "${dest%/*}"
++    [[ -z "$mode" && "${dest%/*}" =~ "extramodules" ]] && add_dir "${dest%/*}"
+ 
+     if [[ -e "${BUILDROOT}${dest}" ]]; then
+         quiet 'overwriting file: %s' "$dest"
