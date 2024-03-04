@@ -1,7 +1,8 @@
-diff --unified --recursive --color a/libalpm/scripts/mkinitcpio b/libalpm/scripts/mkinitcpio
---- a/libalpm/scripts/mkinitcpio	2023-05-30 11:09:11.860174078 -0600
-+++ b/libalpm/scripts/mkinitcpio	2023-05-30 13:48:10.699171696 -0600
-@@ -9,7 +9,7 @@
+diff --unified --recursive a/libalpm/scripts/mkinitcpio b/libalpm/scripts/mkinitcpio
+--- a/libalpm/scripts/mkinitcpio	2024-02-28 12:12:07.000000000 -0700
++++ b/libalpm/scripts/mkinitcpio	2024-03-04 11:00:14.866974762 -0700
+@@ -8,7 +8,7 @@
+ 
  process_preset() {
      if [[ -n "$pkgbase" && -e "$preset" ]]; then
 -        if ! cmp "$preset" <(sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
@@ -9,8 +10,7 @@ diff --unified --recursive --color a/libalpm/scripts/mkinitcpio b/libalpm/script
              if [[ ! -e "$preset.pacsave" ]]; then
                  # save the preset as pacsave
                  mv -- "$preset" "$preset.pacsave" && return 0
-             fi
-@@ -76,7 +76,7 @@
+@@ -104,7 +104,7 @@
              mv -- "${preset}.pacsave" "$preset"
          else
              # create the preset from the template
@@ -19,7 +19,7 @@ diff --unified --recursive --color a/libalpm/scripts/mkinitcpio b/libalpm/script
                  | install -Dm644 /dev/stdin "$preset"
          fi
      fi
-@@ -130,6 +130,11 @@
+@@ -160,6 +160,11 @@
          continue
      fi
  
@@ -29,12 +29,12 @@ diff --unified --recursive --color a/libalpm/scripts/mkinitcpio b/libalpm/script
 +    fi
 +
      case "$1" in
-         install) install_kernel "$pkgbase";;
-         remove) remove_kernel "$pkgbase";;
-diff --unified --recursive --text a/mkinitcpio.d/example.preset b/mkinitcpio.d/example.preset
---- a/mkinitcpio.d/example.preset	2023-03-19 08:24:59.000000000 -0600
-+++ b/mkinitcpio.d/example.preset	2023-03-23 10:29:50.223969082 -0600
-@@ -15,14 +15,14 @@ ALL_microcode=(/boot/*-ucode.img)
+         install) install_kernel "$pkgbase" ;;
+         remove) remove_kernel "$pkgbase" ;;
+diff --unified --recursive a/mkinitcpio.d/example.preset b/mkinitcpio.d/example.preset
+--- a/mkinitcpio.d/example.preset	2024-02-28 12:12:07.000000000 -0700
++++ b/mkinitcpio.d/example.preset	2024-03-04 11:00:14.866974762 -0700
+@@ -14,14 +14,14 @@
  # presetname_image   - the filename of generated image
  # presetname_options - any extra options
  
@@ -55,17 +55,15 @@ diff --unified --recursive --text a/mkinitcpio.d/example.preset b/mkinitcpio.d/e
 +fallback_image="boot/initramfs-6.5-x86_64-fallback.img"
 +fallback_uki="/efi/EFI/Linux/manjaro-6.5-x86_64-fallback.efi"
  fallback_options="-S autodetect"
-diff -Npur a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
---- a/mkinitcpio.d/hook.preset	2023-05-29 23:56:00.000000000 +0200
-+++ b/mkinitcpio.d/hook.preset	2023-09-08 07:10:49.970614551 +0200
-@@ -1,17 +1,17 @@
--# mkinitcpio preset file for the '%PKGBASE%' package
-+# mkinitcpio preset file for the '%KERNELBASE%' package
+diff --unified --recursive a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
+--- a/mkinitcpio.d/hook.preset	2024-02-28 12:12:07.000000000 -0700
++++ b/mkinitcpio.d/hook.preset	2024-03-04 11:03:31.716657205 -0700
+@@ -1,16 +1,16 @@
+ # mkinitcpio preset file for the '%PKGBASE%' package
  
  #ALL_config="/etc/mkinitcpio.conf"
 -ALL_kver="/boot/vmlinuz-%PKGBASE%"
 +ALL_kver="/boot/vmlinuz-%KERNELBASE%"
- ALL_microcode=(/boot/*-ucode.img)
  
  PRESETS=('default' 'fallback')
  
