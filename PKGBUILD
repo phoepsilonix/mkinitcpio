@@ -10,7 +10,7 @@
 
 pkgname=mkinitcpio
 pkgver=38
-pkgrel=3
+pkgrel=4
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
@@ -34,6 +34,7 @@ conflicts=(
 )
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig}
+        "$pkgname-fix-path.patch::https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio/-/commit/aced07e06b9b274439eeb90e235edf42780b4a7a.patch"
         # Manjaro patches
         'manjaro.patch'
         'manjaro-extramodules.patch'
@@ -43,12 +44,14 @@ source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,
 install=mkinitcpio.install
 sha512sums=('ad1a4895e5cc3a01637f71d96ddb79d7f45708ec7305ffdb874403a1eb3c1743d121f28d93273b91792298eb21bcc0c5d9ef1ab3a3773083d60da5bdaee59d6e'
             'SKIP'
+            'b1387deab0199fdb4e4a417b009467cb6f95b2a3f8074858f8a85b46492ebaf420ac028f13d81acb5a675382cccb896cac62f42e26edd82dc1c3a7f48d4d822b'
             '32cf7e85aa09242a023712a05db74bfd765ea60e7a702a9c530b546360f835a71000f5d0fa0a10f504e53efcb46f0b38b09b55622c668440aafa6e7e00f616c7'
             '04f87d5aa3d159045cf25773f3113f9a875d20234ba736f429cdca3ca4f0cb08ee737792ae72ff7a00ac6573fe904cc030cc9adf0a6c5c8e319f370a33872317'
             '23160c5361fdc9338621917f533cedb05e416db05a52f63b18d4b544fbefe427925ea5e8c07f2191e8f248af4573aa814552f8f38de649e3933a2a9503220399'
             'f9d40d170fd6c7278252d61ab0018373b6b4dc3ed018f542a4745fd62e8ed2842e049c7ca8066b472fed1eafe1f19c4e6c167be2c5e3d61bb2bfdfd00782bc88')
 b2sums=('4bc50da7196a69dc0ab7e7de345684baebbb655f9a07def9ac36a7f1c9aec752cf41c62134d6bbf240d8f49c6492a211f152bab062ec09457791d7ab030f1bc5'
         'SKIP'
+        '4530828b559c08aa14f3663b8a078c71bb739adcbd1dfbf21947cfe837ec51fc8ed7e7586c53a4e0ee4b7d86784acab5edf916c387e7385a78fe98c825177fa9'
         'a5fc389eb6611f9c149dbfd1fc0520a5d5d0a0d63367e498b70b38c1044d272df2fc4d484252b112a6757fea79a2f057943745cdd396f630ec71e4f6f45eecb8'
         '1046085788eea6ee04115d3776a292ae6e336fdc2f99b7a9ff4a6408e6b6a83cc106a41c46ba7fb795f81fcfa48ca1752ea3296f8d701435a49f7cbf107b8c76'
         '62bdbdc39f9837b322da789a6bd85b5801c6aabd667964e473b1a86a4d2d96d3c58b3829799bd21310d45c74e83f12e3ff93b2fd4bb1ebc1b42d23844ce71b5a'
