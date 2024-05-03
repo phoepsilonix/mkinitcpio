@@ -1,16 +1,14 @@
 # Maintainer: Philip Müller <philm[at]manjaro[dot]org>
 # Maintainer: Mark Wagie <mark at manjaro dot org>
 # Contributor: Helmut Stult
-
-# Arch credits:
-# Maintainer: Giancarlo Razzolini <grazzolini@archlinux.org>
-# Maintainer: Morten Linderud <foxboron@archlinux.org>
+# Contributor: Giancarlo Razzolini <grazzolini@archlinux.org>
+# Contributor: Morten Linderud <foxboron@archlinux.org>
 # Contributor: Dave Reisner <dreisner@archlinux.org>
 # Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgname=mkinitcpio
 pkgver=39
-pkgrel=0
+pkgrel=1
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
