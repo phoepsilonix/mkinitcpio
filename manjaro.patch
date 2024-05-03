@@ -1,16 +1,7 @@
 diff --unified --recursive a/libalpm/scripts/mkinitcpio b/libalpm/scripts/mkinitcpio
 --- a/libalpm/scripts/mkinitcpio	2024-02-28 12:12:07.000000000 -0700
 +++ b/libalpm/scripts/mkinitcpio	2024-03-04 11:00:14.866974762 -0700
-@@ -8,7 +8,7 @@
- 
- process_preset() {
-     if [[ -n "$pkgbase" && -e "$preset" ]]; then
--        if ! cmp "$preset" <(sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
-+        if ! cmp "$preset" <(sed "s|%KERNELBASE%|${kernelbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
-             if [[ ! -e "$preset.pacsave" ]]; then
-                 # save the preset as pacsave
-                 mv -- "$preset" "$preset.pacsave" && return 0
-@@ -104,7 +104,7 @@
+@@ -15,7 +15,7 @@ install_preset() {
              mv -- "${preset}.pacsave" "$preset"
          else
              # create the preset from the template
@@ -19,7 +10,27 @@ diff --unified --recursive a/libalpm/scripts/mkinitcpio b/libalpm/scripts/mkinit
                  | install -Dm644 /dev/stdin "$preset"
          fi
      fi
-@@ -160,6 +160,11 @@
+@@ -35,7 +35,7 @@ generate_presets() {
+ 
+ remove_preset() {
+     if [[ -n "$pkgbase" && -e "$preset" ]]; then
+-        if ! cmp "$preset" <(sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
++        if ! cmp "$preset" <(sed "s|%KERNELBASE%|${kernelbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
+             if [[ ! -e "$preset.pacsave" ]]; then
+                 # save the preset as pacsave
+                 mv -- "$preset" "$preset.pacsave" && return 0
+@@ -105,8 +105,8 @@ read_preset() {
+         unsorted_filelist+=("/boot/vmlinuz-${pkgbase}"
+             "/boot/initramfs-${pkgbase}.img"
+             "/boot/initramfs-${pkgbase}-fallback.img"
+-            "/efi/EFI/Linux/arch-${pkgbase}.efi"
+-            "/efi/EFI/Linux/arch-${pkgbase}-fallback.efi")
++            "/efi/EFI/Linux/manjaro-${pkgbase}.efi"
++            "/efi/EFI/Linux/manjaro-${pkgbase}-fallback.efi")
+         unsorted_kernellist+=("/boot/vmlinuz-${pkgbase}")
+     fi
+ 
+@@ -184,6 +184,11 @@ while read -r line; do
          continue
      fi
  
