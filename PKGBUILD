@@ -8,28 +8,22 @@
 
 pkgname=mkinitcpio
 pkgver=39
-pkgrel=2
+pkgrel=3
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
-license=('GPL')
+license=('GPL-2.0-only')
 depends=('awk' 'mkinitcpio-busybox>=1.19.4-2' 'kmod' 'util-linux>=2.23' 'libarchive' 'coreutils'
-         'bash' 'binutils' 'diffutils' 'findutils' 'grep' 'filesystem>=2011.10-1' 'gzip' 'systemd')
+         'bash' 'binutils' 'diffutils' 'findutils' 'grep' 'filesystem>=2011.10-1' 'zstd' 'systemd')
 makedepends=('asciidoc')
 checkdepends=('bats' 'bats-assert' 'lzop')
-optdepends=('zstd: Use zstd compression for the initramfs image'
+optdepends=('gzip: Use gzip compression for the initramfs image'
             'xz: Use lzma or xz compression for the initramfs image'
             'bzip2: Use bzip2 compression for the initramfs image'
             'lzop: Use lzo compression for the initramfs image'
             'lz4: Use lz4 compression for the initramfs image'
             'mkinitcpio-nfs-utils: Support for root filesystem on NFS')
 provides=('initramfs')
-conflicts=(
-  'systemd<255.4-2'
-  'cryptsetup<2.7.0-3'
-  'mdadm<4.3-2'
-  'lvm2<2.03.23-3'
-)
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.xz"{,.sig}
         # Manjaro patches
