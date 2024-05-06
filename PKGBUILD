@@ -8,7 +8,7 @@
 
 pkgname=mkinitcpio
 pkgver=39
-pkgrel=3
+pkgrel=4
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
