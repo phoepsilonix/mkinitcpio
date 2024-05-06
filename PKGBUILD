@@ -8,7 +8,7 @@
 
 pkgname=mkinitcpio
 pkgver=39
-pkgrel=1
+pkgrel=2
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
@@ -37,6 +37,7 @@ source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.xz"{,
         'manjaro-extramodules.patch'
         'manjaro-unsupported-modules_from_symbol.patch'
         )
+install=mkinitcpio.install
 sha512sums=('50ae08ddf7596b821c89f927ff6692ca907a5045590096155ec6de64e0b5da647ff2c75d1603ab0035046096d37a6eacae383d458b1bb36bd525691b2b23c9ea'
             'SKIP'
             '94bfd4d7cf4797f5963aad1e449ee558bc13ac2c5a67326e87aa06df98562fdb4c43a1387dfebc011942bbeaed501df4f9c38898b631e356858b1b7a7351d01d'
@@ -69,4 +70,3 @@ check() {
 package() {
   make -C "$pkgname-$pkgver" DESTDIR="$pkgdir" install
 }
-

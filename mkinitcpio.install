@@ -1,0 +1,21 @@
+#!/bin/sh
+
+post_upgrade() {
+  if [ "$(vercmp 39-2 "$2")" -eq 1 ]; then
+    printf '==> Check if we need to add "kms" to hooks.\n'
+
+    if [[ $(sed -n '/^HOOKS=".*\bkms\b.*/p' /etc/mkinitcpio.conf) ]]; then
+      printf '  -> "kms" hook already exists. Doing nothing.\n'
+    else
+      printf '  -> "kms" hook does not exist yet. Adding it to the HOOKS line.\n'
+
+      if [[ $(sed -n '/^HOOKS=".*\bmodconf\b.*/p' /etc/mkinitcpio.conf) ]]; then
+        printf '  -> Adding "kms" hook after "modconf" hook.\n'
+        sed -Ei 's/^HOOKS=(".*\bmodconf\b)(.*)/HOOKS=\1 kms\2/g' /etc/mkinitcpio.conf
+      else
+        printf '  -> Did not find "modconf" hook. Adding "kms" hook at the end.\n'
+        sed -Ei 's/^HOOKS=(".*)"/HOOKS=\1 kms"/g' /etc/mkinitcpio.conf
+      fi
+    fi
+  fi
+}
