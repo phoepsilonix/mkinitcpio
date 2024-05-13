@@ -7,8 +7,8 @@
 # Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgname=mkinitcpio
-pkgver=39
-pkgrel=6
+pkgver=39.1
+pkgrel=1
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
@@ -32,12 +32,12 @@ source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.xz"{,
         'manjaro-unsupported-modules_from_symbol.patch'
         )
 install=mkinitcpio.install
-sha512sums=('50ae08ddf7596b821c89f927ff6692ca907a5045590096155ec6de64e0b5da647ff2c75d1603ab0035046096d37a6eacae383d458b1bb36bd525691b2b23c9ea'
+sha512sums=('8d6ed6eb222f34960e5cd9480e965f1fdb9b1af439d68e199cd17e92a3bbc8a34fb9d4ade1b32a3f8b844529b1c6fbeb2d2fa40e0cf9bd1dd767caa2bb148b60'
             'SKIP'
             'cab3e6ff8d484ff2fda028f37695d8329c13aa240fe13dd1640a05d0147744c20c284cf30fc1079dac54a9813caf5fcbbac78342350305148462738132b350aa'
             '04f87d5aa3d159045cf25773f3113f9a875d20234ba736f429cdca3ca4f0cb08ee737792ae72ff7a00ac6573fe904cc030cc9adf0a6c5c8e319f370a33872317'
             '6928d41d93dfbb78f3a0f12230a3fb0e039fc1f074de7d147c2930b25316d10ea3dfd516f12b1eaabe8b508a95add3618beb22cf1fdbb374a5b02a0ebd1a4ae8')
-b2sums=('3a28d6711ce843aafe2868b09ba5a723e57e4fdffe905ac915aa5d224279590a10bba902933f183de33e08e96a6aad4d9e1d4752be74c011a37c4cbe83c8d645'
+b2sums=('f3ac6e73dcb3825f6708a97022a7573078d9ac11bd5f7f147dc6dabfbe406fb56157cf0efef126b0e505b22816257c329d809f1bc085724ad305928137be9248'
         'SKIP'
         'f60eb492a9c37bea362c7dbab0b1342710a5c675fa7c3c29a65649fbd6449aba239b307f7778cf0184bc2b477db29fabb1867d88e635603f274e6c77dae0b991'
         '1046085788eea6ee04115d3776a292ae6e336fdc2f99b7a9ff4a6408e6b6a83cc106a41c46ba7fb795f81fcfa48ca1752ea3296f8d701435a49f7cbf107b8c76'
