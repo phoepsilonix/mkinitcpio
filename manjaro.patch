@@ -59,7 +59,8 @@ diff --unified --recursive a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
 --- a/mkinitcpio.d/hook.preset	2024-02-28 12:12:07.000000000 -0700
 +++ b/mkinitcpio.d/hook.preset	2024-03-04 11:03:31.716657205 -0700
 @@ -1,16 +1,16 @@
- # mkinitcpio preset file for the '%PKGBASE%' package
+-# mkinitcpio preset file for the '%PKGBASE%' package
++# mkinitcpio preset file for the '%KERNELBASE%' package
  
  #ALL_config="/etc/mkinitcpio.conf"
 -ALL_kver="/boot/vmlinuz-%PKGBASE%"
@@ -73,7 +74,7 @@ diff --unified --recursive a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
 -#default_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp"
 +default_image="/boot/initramfs-%KERNELBASE%.img"
 +#default_uki="/efi/EFI/Linux/manjaro-%KERNELBASE%.efi"
-+#default_options="--splash /usr/share/systemd/bootctl/splash-manjaro.bmp"
++default_options="--splash /usr/share/systemd/bootctl/splash-manjaro.bmp"
  
  #fallback_config="/etc/mkinitcpio.conf"
 -fallback_image="/boot/initramfs-%PKGBASE%-fallback.img"
@@ -81,3 +82,16 @@ diff --unified --recursive a/mkinitcpio.d/hook.preset b/mkinitcpio.d/hook.preset
 +fallback_image="/boot/initramfs-%KERNELBASE%-fallback.img"
 +#fallback_uki="/efi/EFI/Linux/manjaro-%KERNELBASE%-fallback.efi"
  fallback_options="-S autodetect"
+diff --git a/mkinitcpio.conf b/mkinitcpio.conf
+index fc54be6..89411b1 100644
+--- a/mkinitcpio.conf
++++ b/mkinitcpio.conf
+@@ -4,7 +4,7 @@
+ # run.  Advanced users may wish to specify all system modules
+ # in this array.  For instance:
+ #     MODULES=(usbhid xhci_hcd)
+-MODULES=()
++MODULES=(crc32c-intel)
+ 
+ # BINARIES
+ # This setting includes any additional binaries a given user may

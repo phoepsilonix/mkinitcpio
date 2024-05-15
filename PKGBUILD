@@ -10,7 +10,7 @@
 
 pkgname=mkinitcpio
 pkgver=38.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
@@ -38,21 +38,19 @@ source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.gz"{,
         'manjaro.patch'
         'manjaro-extramodules.patch'
         'manjaro-unsupported-modules_from_symbol.patch'
-        'revert-ab6bad7.patch'
+        #'revert-ab6bad7.patch'
         )
 install=mkinitcpio.install
 sha512sums=('e727509badc528f45f2b193b3f49c202df41d4e75067bebd44c22ebc59f635d4a9596bc671d609d8941644f3a246267f7a199946730ba474040a1f24b94f663c'
             'SKIP'
-            '32cf7e85aa09242a023712a05db74bfd765ea60e7a702a9c530b546360f835a71000f5d0fa0a10f504e53efcb46f0b38b09b55622c668440aafa6e7e00f616c7'
+            'af940f543bb5fedcd17cbc42a38c652ccafdd25a1175b70b291dbcbf8c6e9fa4cf052aa905165eb8edb0f880ec255d67f5173f08d8e3635b15e3589a9803354a'
             '04f87d5aa3d159045cf25773f3113f9a875d20234ba736f429cdca3ca4f0cb08ee737792ae72ff7a00ac6573fe904cc030cc9adf0a6c5c8e319f370a33872317'
-            '23160c5361fdc9338621917f533cedb05e416db05a52f63b18d4b544fbefe427925ea5e8c07f2191e8f248af4573aa814552f8f38de649e3933a2a9503220399'
-            'f9d40d170fd6c7278252d61ab0018373b6b4dc3ed018f542a4745fd62e8ed2842e049c7ca8066b472fed1eafe1f19c4e6c167be2c5e3d61bb2bfdfd00782bc88')
+            '23160c5361fdc9338621917f533cedb05e416db05a52f63b18d4b544fbefe427925ea5e8c07f2191e8f248af4573aa814552f8f38de649e3933a2a9503220399')
 b2sums=('625455bb1140688bcdf04c946eb6fa1da53deaa221b2c8090c173aef1d7fc617227aa0674344f3c18d5b9ab77a093725856f4f0cd3b8a33462a2ac742f0dbf11'
         'SKIP'
-        'a5fc389eb6611f9c149dbfd1fc0520a5d5d0a0d63367e498b70b38c1044d272df2fc4d484252b112a6757fea79a2f057943745cdd396f630ec71e4f6f45eecb8'
+        '3a4e683e2ed97697d058c455e170e05559b64d61efbbd643baba4efb155ca32b9affd214025c73a6e210c4c4f17b5954447dabf7fbb3e1e31cf01f786aa14a04'
         '1046085788eea6ee04115d3776a292ae6e336fdc2f99b7a9ff4a6408e6b6a83cc106a41c46ba7fb795f81fcfa48ca1752ea3296f8d701435a49f7cbf107b8c76'
-        '62bdbdc39f9837b322da789a6bd85b5801c6aabd667964e473b1a86a4d2d96d3c58b3829799bd21310d45c74e83f12e3ff93b2fd4bb1ebc1b42d23844ce71b5a'
-        '44c66edefdce5836f57f272c86f90dd44c1669c0050efea01423e07856bb081466a1714dd31b41b159dcaaded38ffb175722db0297c76036303b380d94d76ea1')
+        '62bdbdc39f9837b322da789a6bd85b5801c6aabd667964e473b1a86a4d2d96d3c58b3829799bd21310d45c74e83f12e3ff93b2fd4bb1ebc1b42d23844ce71b5a')
 validpgpkeys=('ECCAC84C1BA08A6CC8E63FBBF22FB1D78A77AEAB'    # Giancarlo Razzolini
               'C100346676634E80C940FB9E9C02FF419FECBE16')   # Morten Linderud
 
