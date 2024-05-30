@@ -8,7 +8,7 @@
 
 pkgname=mkinitcpio
 pkgver=39.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
 url='https://gitlab.archlinux.org/archlinux/mkinitcpio/mkinitcpio'
@@ -26,6 +26,7 @@ optdepends=('gzip: Use gzip compression for the initramfs image'
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.xz"{,.sig}
+        '0001-trigger.patch'
         # Manjaro patches
         'manjaro.patch'
         'manjaro-extramodules.patch'
@@ -34,11 +35,13 @@ source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.xz"{,
 install=mkinitcpio.install
 sha512sums=('e4ba9fe901da56bb116510ec0c6abeba5153e57d9545baccbc466932951b7f324aa75ef7cc3de87f966456b0365b17552f367411d62585d500e88dc5c815058b'
             'SKIP'
+            'b21e3961294e80bedd89a7e332ab11fc3b83eebfaf58d8f658e30f7d9caf2f84f4934224173c70f111932de8538fa327f5f6bfe9576b11bcbaf84d2d5ad8e85d'
             '906b9fa4df1e9be00ad4a3af270f12d2a463be129854ca694cda1efafdba6c22dde88dfb122428d5ee09b13c14b79a76f00f9fbb04603e23ca46a7f179a7d0d0'
             '04f87d5aa3d159045cf25773f3113f9a875d20234ba736f429cdca3ca4f0cb08ee737792ae72ff7a00ac6573fe904cc030cc9adf0a6c5c8e319f370a33872317'
             '6928d41d93dfbb78f3a0f12230a3fb0e039fc1f074de7d147c2930b25316d10ea3dfd516f12b1eaabe8b508a95add3618beb22cf1fdbb374a5b02a0ebd1a4ae8')
 b2sums=('7bd6bf491dd8b23d83e42834566375736cf8868d5120c7e24f4c8923eb03a64864cdda51d6a6f41373db88c29905535e4c8aa4bde172955bc7529e6b3ffc252c'
         'SKIP'
+        '3b8e08d56e209ad11827d65595ab245bb680e72fb81139ba946e7610d16214c2a9022f1a1794e6797ef07fb0a43c5239167729225daf89396a8920f39f75e34b'
         'd7dc49e67ee21e355b3eecaf281b23c52137b4fb6187ea1d50b885b99119d1d768fed4571fe4ef67c1a35cdd385bf2323f494a1e016ef6309b642fbaf8233241'
         '1046085788eea6ee04115d3776a292ae6e336fdc2f99b7a9ff4a6408e6b6a83cc106a41c46ba7fb795f81fcfa48ca1752ea3296f8d701435a49f7cbf107b8c76'
         'e5c9e2f19596b7dc8207ca94d138263edafb1d9dc80bc6177462b109ac66500a64fd72c43657824f65204666c3bf1476d7aa5e8d7f0b9477f176739830c99c6a')
