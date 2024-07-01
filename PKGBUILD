@@ -7,7 +7,7 @@
 # Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgname=mkinitcpio
-pkgver=39.1
+pkgver=39.2
 pkgrel=2
 pkgdesc="Modular initramfs image creation utility"
 arch=('any')
@@ -26,19 +26,22 @@ optdepends=('gzip: Use gzip compression for the initramfs image'
 provides=('initramfs')
 backup=('etc/mkinitcpio.conf')
 source=("https://sources.archlinux.org/other/$pkgname/$pkgname-$pkgver.tar.xz"{,.sig}
+        '0001-trigger.patch'
         # Manjaro patches
         'manjaro.patch'
         'manjaro-extramodules.patch'
         'manjaro-unsupported-modules_from_symbol.patch'
         )
 install=mkinitcpio.install
-sha512sums=('8d6ed6eb222f34960e5cd9480e965f1fdb9b1af439d68e199cd17e92a3bbc8a34fb9d4ade1b32a3f8b844529b1c6fbeb2d2fa40e0cf9bd1dd767caa2bb148b60'
+sha512sums=('e4ba9fe901da56bb116510ec0c6abeba5153e57d9545baccbc466932951b7f324aa75ef7cc3de87f966456b0365b17552f367411d62585d500e88dc5c815058b'
             'SKIP'
+            'b21e3961294e80bedd89a7e332ab11fc3b83eebfaf58d8f658e30f7d9caf2f84f4934224173c70f111932de8538fa327f5f6bfe9576b11bcbaf84d2d5ad8e85d'
             'ef6011509177276c79c35037ed305ca8c368ec7ee01f7f7a7ffa3abfd845a32f52d079627e0b1f22ad1b07d2eac1b5efb6ff74f9fa38440c7575ed47e2be0c37'
             '04f87d5aa3d159045cf25773f3113f9a875d20234ba736f429cdca3ca4f0cb08ee737792ae72ff7a00ac6573fe904cc030cc9adf0a6c5c8e319f370a33872317'
             '6928d41d93dfbb78f3a0f12230a3fb0e039fc1f074de7d147c2930b25316d10ea3dfd516f12b1eaabe8b508a95add3618beb22cf1fdbb374a5b02a0ebd1a4ae8')
-b2sums=('f3ac6e73dcb3825f6708a97022a7573078d9ac11bd5f7f147dc6dabfbe406fb56157cf0efef126b0e505b22816257c329d809f1bc085724ad305928137be9248'
+b2sums=('7bd6bf491dd8b23d83e42834566375736cf8868d5120c7e24f4c8923eb03a64864cdda51d6a6f41373db88c29905535e4c8aa4bde172955bc7529e6b3ffc252c'
         'SKIP'
+        '3b8e08d56e209ad11827d65595ab245bb680e72fb81139ba946e7610d16214c2a9022f1a1794e6797ef07fb0a43c5239167729225daf89396a8920f39f75e34b'
         '6698b916460b5c88b3c2b2494178afcee340f95453c6303ee5e4bce8cc53cc770f9f670d40c47f1f3b67a09c18b2ca06705de7021c85886475dd25367a478b3d'
         '1046085788eea6ee04115d3776a292ae6e336fdc2f99b7a9ff4a6408e6b6a83cc106a41c46ba7fb795f81fcfa48ca1752ea3296f8d701435a49f7cbf107b8c76'
         'e5c9e2f19596b7dc8207ca94d138263edafb1d9dc80bc6177462b109ac66500a64fd72c43657824f65204666c3bf1476d7aa5e8d7f0b9477f176739830c99c6a')
