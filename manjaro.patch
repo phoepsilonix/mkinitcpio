@@ -1,16 +1,16 @@
 diff --unified --recursive a/libalpm/scripts/mkinitcpio b/libalpm/scripts/mkinitcpio
 --- a/libalpm/scripts/mkinitcpio	2024-02-28 12:12:07.000000000 -0700
 +++ b/libalpm/scripts/mkinitcpio	2024-03-04 11:00:14.866974762 -0700
-@@ -8,7 +8,7 @@
+@@ -7,7 +7,7 @@ args=()
+ package=0
  
- process_preset() {
-     if [[ -n "$pkgbase" && -e "$preset" ]]; then
--        if ! cmp "$preset" <(sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
-+        if ! cmp "$preset" <(sed "s|%KERNELBASE%|${kernelbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
-             if [[ ! -e "$preset.pacsave" ]]; then
-                 # save the preset as pacsave
-                 mv -- "$preset" "$preset.pacsave" && return 0
-@@ -104,7 +104,7 @@
+ install_preset() {
+-    local pkgbase="$1" preset="$2"
++    local pkgbase="$1" preset="$2" kernelbase="$3"
+ 
+     if [[ ! -e "$preset" ]]; then
+         if [[ -e "$preset.pacsave" ]]; then
+@@ -15,27 +15,31 @@ install_preset() {
              mv -- "${preset}.pacsave" "$preset"
          else
              # create the preset from the template
@@ -19,11 +19,58 @@ diff --unified --recursive a/libalpm/scripts/mkinitcpio b/libalpm/scripts/mkinit
                  | install -Dm644 /dev/stdin "$preset"
          fi
      fi
-@@ -160,6 +160,11 @@
+ }
+ 
+ generate_presets() {
+-    local preset pkgbase pkgbase_path
++    local preset pkgbase pkgbase_path kernelbase
+ 
+     # only make presets for kernels with a pkgbase
+     for pkgbase_path in /usr/lib/modules/*/pkgbase; do
+         if read -r pkgbase &>/dev/null <"$pkgbase_path"; then
+             preset="/etc/mkinitcpio.d/${pkgbase}.preset"
+-            install_preset "$pkgbase" "$preset"
++            if ! read -r kernelbase &>/dev/null < "$(dirname ${pkgbase_path})/kernelbase"; then
++                # this kernel has no kernelbase, use pkgbase
++                kernelbase="${pkgbase}"
++            fi
++            install_preset "$pkgbase" "$preset" "$kernelbase"
+         fi
+     done
+ }
+ 
+ remove_preset() {
+     if [[ -n "$pkgbase" && -e "$preset" ]]; then
+-        if ! cmp "$preset" <(sed "s|%PKGBASE%|${pkgbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
++        if ! cmp "$preset" <(sed "s|%KERNELBASE%|${kernelbase}|g" /usr/share/mkinitcpio/hook.preset) &>/dev/null; then
+             if [[ ! -e "$preset.pacsave" ]]; then
+                 # save the preset as pacsave
+                 mv -- "$preset" "$preset.pacsave" && return 0
+@@ -105,8 +109,8 @@ read_preset() {
+         unsorted_filelist+=("/boot/vmlinuz-${pkgbase}"
+             "/boot/initramfs-${pkgbase}.img"
+             "/boot/initramfs-${pkgbase}-fallback.img"
+-            "/efi/EFI/Linux/arch-${pkgbase}.efi"
+-            "/efi/EFI/Linux/arch-${pkgbase}-fallback.efi")
++            "/efi/EFI/Linux/manjaro-${pkgbase}.efi"
++            "/efi/EFI/Linux/manjaro-${pkgbase}-fallback.efi")
+         unsorted_kernellist+=("/boot/vmlinuz-${pkgbase}")
+     fi
+ 
+@@ -125,7 +129,7 @@ install_kernel() {
+     local pkgbase="$1"
+     local kernel preset="/etc/mkinitcpio.d/${pkgbase}.preset"
+ 
+-    install_preset "$pkgbase" "$preset"
++    install_preset "$pkgbase" "$preset" "$kernelbase"
+     (
+         # source the preset to get the kernel and image locations
+         # shellcheck disable=SC1090
+@@ -184,6 +188,11 @@ while read -r line; do
          continue
      fi
  
-+    if ! read -r kernelbase > /dev/null 2>&1 < "${line%/vmlinuz}/kernelbase"; then
++    if ! read -r kernelbase &>/dev/null < "${line%/vmlinuz}/kernelbase"; then
 +        # this kernel has no kernelbase, use pkgbase
 +        kernelbase="${pkgbase}"
 +    fi
